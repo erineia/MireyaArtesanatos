@@ -39,15 +39,11 @@ h1, h2, h3 {
 }
 
 /* ==================== HEADER ==================== */
-.header {
-  background: var(--dark);
-  padding: 20px 5%;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+.header{
   position: sticky;
   top: 0;
-  z-index: 100;
-  width: 100%;
-  transition: all 0.3s ease;
+  z-index: 1000;
+  background: #3f3f3f;
 }
 
 .header.scrolled {
@@ -55,12 +51,11 @@ h1, h2, h3 {
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-.header-content {
-  max-width: 1400px;
-  margin: 0 auto;
+.header-content{
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
 }
 
 .logo {
@@ -80,10 +75,17 @@ h1, h2, h3 {
   height: 100%;
   filter: drop-shadow(0 2px 8px rgba(212, 165, 116, 0.3));
 }
-
+.menu-btn{
+  display: none;
+  font-size: 26px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
 .nav {
   display: flex;
-  gap: 32px;
+  gap: 18px;
   align-items: center;
 }
 
@@ -1450,9 +1452,7 @@ h1, h2, h3 {
     flex-wrap: wrap;
     gap: 15px;
   }
-  .nav {
-    display: none;
-  }
+
   /* ==================== MENU HAMBÚRGUER ==================== */
 .menu-toggle {
   display: none;
@@ -1486,26 +1486,23 @@ h1, h2, h3 {
 }
 
 /* Mobile Menu */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
+@media (max-width: 768px){
+  .nav{ display:none !important; }
+  .nav.open{ display:flex !important; }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 300px;
-    height: 100vh;
-    background: var(--dark);
+
+   .nav{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 12px;
+    right: 12px;
     flex-direction: column;
-    padding: 100px 30px 30px;
-    gap: 20px;
-    transition: right 0.4s ease;
-    box-shadow: -5px 0 25px rgba(0,0,0,0.3);
-    z-index: 100;
-    overflow-y: auto;
+    background: #3f3f3f;
+    padding: 14px;
+    border-radius: 14px;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
   }
 
   .nav.active {
@@ -1730,41 +1727,118 @@ h1, h2, h3 {
     height: 20px;
   }
 }
+/* ===== MENU MOBILE (coloque no FINAL do style.css) ===== */
 
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 24px;
-  }
-  .brand-name {
-    font-size: 36px;
-  }
-  .hero p {
-    font-size: 14px;
+.menu-toggle{
+  display: none; /* desktop: escondido */
+}
+
+/* desktop: menu aparece normal */
+.nav{
+  display: flex;
+}
+
+/* mobile */
+@media (max-width: 768px){
+  .menu-toggle{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
   }
 
-  .section-title {
-    font-size: 24px;
+  .menu-toggle span{
+    width: 28px;
+    height: 3px;
+    background: #fff; /* ou var(--cream) */
+    border-radius: 3px;
+    transition: all .3s ease;
   }
 
-  .custom-title {
+  /* menu fechado */
+  .nav{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    background: #3f3f3f;
+    padding: 14px;
+    border-radius: 14px;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+
+  /* ✅ menu aberto */
+  .nav.active{
+    display: flex;
+  }
+
+  .nav a,
+  .nav button{
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* ===== FIX MENU MOBILE (COLE NO FINAL) ===== */
+
+.header { position: sticky; top: 0; z-index: 1000; }
+.header-content { position: relative; }
+
+/* Desktop */
+.nav { display: flex; align-items: center; gap: 18px; }
+.menu-btn { display: none; }
+
+/* Mobile */
+@media (max-width: 768px){
+  /* não deixa quebrar linha no header */
+  .header-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap !important;
+  }
+
+  /* força o botão aparecer */
+  .menu-btn{
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     font-size: 28px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
   }
 
-  .modal-title {
-    font-size: 22px;
+  /* menu fechado */
+  .nav{
+    display: none !important;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    background: #3f3f3f;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
   }
 
-  .cart-header h2 {
-    font-size: 20px;
+  /* menu aberto */
+  .nav.open{
+    display: flex !important;
   }
 
-  .product-name {
-    font-size: 18px;
-  }
-
-  .step-number {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+  .nav a, .nav button{
+    width: 100%;
   }
 }

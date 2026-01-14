@@ -531,39 +531,37 @@ window.addEventListener('scroll', () => {
 loadCart();
 renderProducts();
 // ==================== MENU MOBILE ====================
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.querySelector('.nav');
-const menuOverlay = document.getElementById('menuOverlay');
+const btn = document.getElementById('menuBtn');
+const nav = document.getElementById('navMenu');
 
-if (menuToggle) {
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    nav.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('active')
-      ? 'hidden'
-      : '';
-  });
+function closeMenu() {
+  if (!btn || !nav) return;
+  nav.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
 }
 
-if (menuOverlay) {
-  menuOverlay.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    nav.classList.remove('active');
-    menuOverlay.classList.remove('active');
-    document.body.style.overflow = '';
+if (btn && nav) {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = !nav.classList.contains('open');
+    nav.classList.toggle('open', willOpen);
+    btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  });
+
+  // ✅ Fecha ao clicar em qualquer item do menu (delegação)
+  nav.addEventListener('click', (e) => {
+    const clickedLink = e.target.closest('a');
+    if (clickedLink && window.innerWidth <= 768) closeMenu();
+  });
+
+  // (opcional) Fecha clicando fora
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('open')) return;
+    const inside = nav.contains(e.target) || btn.contains(e.target);
+    if (!inside) closeMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeMenu();
   });
 }
-
-// Fecha menu ao clicar em link
-document.querySelectorAll('.nav a').forEach((link) => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth <= 768) {
-      menuToggle.classList.remove('active');
-      nav.classList.remove('active');
-      menuOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-});
