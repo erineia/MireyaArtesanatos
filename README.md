@@ -1,47 +1,9 @@
-🚀 Como rodar o projeto localmente
+Mireya Artesanatos
 
-1. Instale o Node.js se ainda não tiver: https://nodejs.org/
-2. No terminal, navegue até a pasta do projeto.
-3. Execute o comando abaixo para instalar o servidor estático (caso não tenha):
-   npm install -g serve
-4. Inicie o servidor na porta 4000:
-   npx serve -l 4000
-5. Acesse no navegador:
-   http://localhost:4000
-
-Pronto! O site estará disponível localmente.
-
-📖 README - Site Mireya Artesanatos
-🎯 Sobre o Projeto
-Site de vendas para artesanatos com carrinho de compras e integração com WhatsApp. Os clientes navegam pelos produtos, adicionam ao carrinho e finalizam o pedido diretamente pelo WhatsApp.
-
-🛠️ Como Adicionar Produtos
-Passo 1: Localize a seção de produtos no código
-No arquivo HTML, procure por este comentário:
-
-// ============================================
-// DADOS DOS PRODUTOS
-// ============================================
-
-Logo abaixo você encontrará o array products.
-
-Passo 2: Estrutura de um produto
-Cada produto segue este formato:
-
-{
-id: 1, // Número único (não repita!)
-name: "Nome do Produto", // Nome do artesanato
-price: 45.00, // Preço (use ponto, não vírgula)
-category: "Decoração", // Opções: "Decoração", "Presentes" ou "Personalizados"
-description: "Descrição detalhada do produto com informações relevantes",
-images: [ // Array de links de imagens
-"https://link-da-imagem.com/foto1.jpg",
-"https://link-da-imagem.com/foto2.jpg" // Pode ter várias fotos
-],
+Este projeto é um site de vendas de artesanatos, onde clientes podem navegar pelos produtos, adicionar itens ao carrinho e finalizar o pedido pelo WhatsApp.
 available: true, // true = disponível | false = indisponível
 madeToOrder: false, // true = sob encomenda | false = pronta entrega
 variations: [] // Array de variações: ["Azul", "Rosa", "Verde"]
-}
 
 Passo 3: Exemplo prático de adição
 const products = [
